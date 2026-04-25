@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --canvas: #f4efe6;
+  --canvas-deep: #ebe3d4;
+  --shell: #fbfaf7;
+  --shell-alt: #f4f1ea;
+  --shell-line: #e8e2d4;
+  --ink: #0c0c0c;
+  --ink-quiet: #737373;
+  --accent-primary: #1b2a36;
+  --accent-ember: #c8612c;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--canvas);
+  color: var(--ink);
+  font-feature-settings: "ss01", "ss02", "kern";
+}
+
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-heebo), system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* Selection */
+::selection {
+  background: var(--ink);
+  color: var(--canvas);
+}
+
+/* Subtle grain on warm canvas */
+.canvas-grain {
+  position: relative;
+}
+.canvas-grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  mix-blend-mode: multiply;
+  background-image: radial-gradient(
+      circle at 1px 1px,
+      rgba(40, 30, 16, 0.045) 1px,
+      transparent 0
+    );
+  background-size: 3px 3px;
+  z-index: 1;
+}
+
+/* Cinematic veil — sits over hero scenic backdrop */
+.veil-soft {
+  background: radial-gradient(
+    120% 80% at 50% 0%,
+    rgba(251, 250, 247, 0) 0%,
+    rgba(251, 250, 247, 0.4) 55%,
+    rgba(251, 250, 247, 0.95) 100%
+  );
+}
+
+.veil-edge {
+  background: linear-gradient(
+    180deg,
+    rgba(251, 250, 247, 0) 0%,
+    rgba(251, 250, 247, 0) 70%,
+    rgba(251, 250, 247, 1) 100%
+  );
+}
+
+/* Logical RTL helpers — keep bullets/icons on the right */
+[dir="rtl"] .flip-x-rtl {
+  transform: scaleX(-1);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Anchor offset for sticky nav */
+section[id] {
+  scroll-margin-top: 96px;
+}
+
+/* Editorial italic accent — Frank Ruhl Libre on selected words */
+.serif-accent {
+  font-family: var(--font-frank), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Hairline */
+.hairline {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(12, 12, 12, 0.14) 20%,
+    rgba(12, 12, 12, 0.14) 80%,
+    transparent
+  );
+}
+
+/* Floating card baseline */
+.float-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid rgba(12, 12, 12, 0.06);
+  box-shadow: 0 24px 60px -20px rgba(20, 16, 8, 0.18),
+    0 6px 18px -8px rgba(20, 16, 8, 0.08);
+}
+
+/* Ambient gradient orb */
+.orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(60px);
+  opacity: 0.55;
+  pointer-events: none;
+}
